@@ -1,8 +1,13 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeStringify from 'rehype-stringify';
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -21,18 +26,28 @@ async function parseMarkdownFile(fileName: string): Promise<Post> {
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
-  const processedContent = await remark()
-    .use(html)
+
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, { behavior: 'wrap'})
+    .use(rehypePrism, { 
+      ignoreMissing: true,
+      showLineNumbers: true,
+    })
+    .use(rehypeStringify)
     .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = result.toString();
+  console.log(result)
 
   return {
     id,
     contentHtml,
     title: matterResult.data.title,
     date: matterResult.data.date || "",
-    description: matterResult.data.description,
-    image: matterResult.data.image,
+    description: matterResult.data.description || "",
+    image: matterResult.data.image || "",
   };
 }
 

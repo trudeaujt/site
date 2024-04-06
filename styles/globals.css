@@ -1,0 +1,35 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'prism-themes/themes/prism-one-dark.css';
+@import 'prism-custom.css';
+
+html {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+  background-color: #2d3748;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1a202c; /* This is the 'gray.900' color in Tailwind CSS */
+  color: #f7fafc; /* This is the 'gray.100' color in Tailwind CSS */
+}
+
+a {
+  color: #f7fafc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

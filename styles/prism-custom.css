@@ -1,0 +1,25 @@
+.code-block {
+  position: relative;
+}
+
+.code-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  background-color: #1f2937;
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-language {
+  color: #f7fafc;
+}
+
+.copy-code {
+  color: #f7fafc;
+  cursor: pointer;
+}
